@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".recordCoords"></activity>
+        <service android:name=".recordCoords"></service>
 
     </application>
 

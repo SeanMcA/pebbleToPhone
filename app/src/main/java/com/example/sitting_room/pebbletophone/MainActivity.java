@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private static final String WATCHAPP_FILENAME = "android-example.pbw";
     private static final String TAG = "Pebble";
     private static final boolean INFO = true;
+    Button clearFileContents;
+    Button startButton;
+    Button stopButton;
+    TextFile tf;
+    int holeNumber = 1;
 
     private PebbleDataReceiver appMessageReciever;
 
@@ -35,35 +42,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Customize ActionBar
-        //ActionBar actionBar = getActionBar();
-        //actionBar.setTitle("PebbleKit Example");
-        //actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_orange)));
-
-        // Add Install Button behavior
-        Button installButton = findViewById(R.id.button_install);
-        installButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Install
-                Toast.makeText(getApplicationContext(), "Installing watchApp...", Toast.LENGTH_SHORT).show();
-                sideloadInstall(getApplicationContext(), WATCHAPP_FILENAME);
-                Intent intent = new Intent(MainActivity.this, recordCoords.class);
-                startActivity(intent);
-            }
-        });
-
-        Button startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, recordCoords.class);
-                startActivity(intent);
-            }
-        });
+        tf = new TextFile();
+        clearFileContents = findViewById(R.id.ClearFileContents);
+        startButton = findViewById(R.id.startButton);
+        stopButton = findViewById(R.id.stopButton);
+        startButton.setVisibility(View.VISIBLE);
+        stopButton.setVisibility(View.INVISIBLE);
     } // onCreate
 
+    public void clearFileContents(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Are you sure you want to clear the file?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Log.i(TAG, "Clearing File Contents.");
+                tf.writeData("", false);
+                holeNumber = 1;
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
+    public void startService(View view){
+        startButton.setEnabled(false);
+        startButton.setVisibility(View.INVISIBLE);
+        stopButton.setVisibility(View.VISIBLE);
+        startService(new Intent(MainActivity.this, recordCoords.class));
+    }
+
+    public void stopService(View view){
+        startButton.setVisibility(View.VISIBLE);
+        stopButton.setVisibility(View.INVISIBLE);
+        stopService(new Intent(MainActivity.this, recordCoords.class));
+    }
 
     @Override
     protected void onPause() {

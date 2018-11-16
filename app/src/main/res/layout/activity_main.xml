@@ -12,38 +12,42 @@
         android:layout_height="fill_parent"
         android:background="#FFFFFF" >
 
-        <TextView
-            android:id="@+id/install_watchapp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="1. Install Watchapp"
-            android:textColor="#AAAAAA"
-            android:textSize="25sp" />
+
 
         <Button
-            android:id="@+id/button_install"
-            android:layout_below="@id/install_watchapp"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@color/actionbar_orange"
-            android:textColor="#FFFFFF"
-            android:text="INSTALL"/>
-
-        <Button
-            android:id="@+id/startButton"
-            android:layout_below="@id/button_install"
+            android:text="Clear file contents"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:background="@color/actionbar_orange"
             android:textColor="#FFFFFF"
-            android:text="Button" />
+            android:onClick="clearFileContents"
+            android:id="@+id/ClearFileContents" />
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_below="@id/ClearFileContents"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@color/actionbar_orange"
+            android:textColor="#FFFFFF"
+            android:onClick="startService"
+            android:text="Start Service" />
+
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_below="@id/startButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@color/actionbar_orange"
+            android:textColor="#FFFFFF"
+            android:onClick="stopService"
+            android:text="Stop Service" />
 
     </RelativeLayout>
 
