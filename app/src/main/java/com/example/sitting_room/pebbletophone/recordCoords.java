@@ -53,7 +53,7 @@ public class recordCoords extends AppCompatActivity implements Observer{
     private static final int BUTTON_DOWN = 2;
     private Handler handler = new Handler();
     private PebbleKit.PebbleDataReceiver appMessageReciever;
-    private static final String TAG = "RecordCoords";
+    private static final String TAG = "Pebble";
     private static final boolean logging = true;
 
 
@@ -111,42 +111,27 @@ public class recordCoords extends AppCompatActivity implements Observer{
         collectingData = true;
         Log.i(TAG, "collecting data");
         startButton.setEnabled(false);
-        final Handler h = new Handler();
+        final Handler hdlr = new Handler();
         final int delay = 1000; // milliseconds OR 1 second
 
-        h.postDelayed(new Runnable() {
+        hdlr.postDelayed(new Runnable() {
             public void run() {
-                    String data = lat + ", " + lng + ", 0" +"\r\n";//0 means this is a general location record.
+                if(collectingData) { // stops auto gps data collection
+                    String data = lat + ", " + lng + ", 0" + "\r\n";//0 means this is a general location record.
                     tf.writeData(data, true);
-                    h.postDelayed(this, delay);
+                }
+                    hdlr.postDelayed(this, delay);
             }
         }, delay);
 
     }
 
     public void stopCollectingData(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(cxt);
-        builder.setTitle("Stopping data collection");
-        builder.setCancelable(false);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
                 if(logging) Log.i(TAG, "stopCollectingData started");
                 collectingData = false;
                 startButton.setEnabled(true);
                 Toast toast = Toast.makeText(cxt, "Stopping data collection.", Toast.LENGTH_SHORT);
                 toast.show();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-
-
     }
 
     public void clearFileContents(View view){

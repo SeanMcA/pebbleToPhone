@@ -24,7 +24,7 @@ import com.getpebble.android.kit.PebbleKit.PebbleDataReceiver;
 public class MainActivity extends AppCompatActivity {
 
     private static final String WATCHAPP_FILENAME = "android-example.pbw";
-    private static final String TAG = "Main Activity: ";
+    private static final String TAG = "Pebble";
     private static final boolean INFO = true;
 
     private PebbleDataReceiver appMessageReciever;

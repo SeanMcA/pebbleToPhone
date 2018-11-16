@@ -12,7 +12,7 @@ class TextFile{
     private File newFolder;
     private File file;
 
-    private static final String TAG = "TextFile";
+    private static final String TAG = "Pebble";
     private static final boolean logging = true;
 
 
