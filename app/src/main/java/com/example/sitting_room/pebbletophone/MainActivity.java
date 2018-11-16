@@ -53,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button startButton = findViewById(R.id.startButton);
+        startButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, recordCoords.class);
+                startActivity(intent);
+            }
+        });
     } // onCreate
 
 
