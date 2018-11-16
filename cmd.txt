@@ -1,0 +1,16 @@
+e:
+cd E:\AppData\Local\Android\Sdk\platform-tools
+adb shell
+run-as com.example.sitting_room.pebbletophone
+cd files
+
+
+
+adb shell
+ls
+cd sdcard
+ls
+cd testFolder
+This gets you to see the folders
+If you want to pull the MyCoordinates.txt file simply open a command prompt in the adb folder and then enter:
+adb pull /sdcard/TestFolder/MyCoordinates.txt

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.sitting_room.pebbletophone.recordCoords">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Accuracy is:" />
+
+    <TextView
+        android:id="@+id/accuracy"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Clear file contents"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:onClick="clearFileContents"
+        android:id="@+id/ClearFileContents" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_marginTop="40dp"
+        android:text="HOLE FINISHED STOP Collecting Data"
+        android:onClick="stopCollectingData"
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"
+        android:text="START Collecting GPS Data"
+        android:onClick="startCollectingData" />
+
+
+</LinearLayout>
